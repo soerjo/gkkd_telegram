@@ -7,15 +7,18 @@ import { TelegramService } from './services/telegram.service';
 @Module({
   imports: [
     TelegrafModule.forRootAsync({
-      useFactory: () => {
-        const token = process.env.TELEGRAM_BOT_TOKEN;
-        return {
-          token: token,
-          launchOptions: {
-            dropPendingUpdates: true,
-          },
-        };
-      },
+      useFactory: () => ({
+        token: process.env.TELEGRAM_BOT_TOKEN,
+        launchOptions: process.env.TELEGRAM_BOT_WEB_HOOKS_DOMAIN
+          ? {
+              dropPendingUpdates: true,
+              webhook: {
+                domain: process.env.TELEGRAM_BOT_WEB_HOOKS_DOMAIN,
+                hookPath: process.env.TELEGRAM_BOT_WEB_HOOKS_PATH,
+              },
+            }
+          : {},
+      }),
     }),
   ],
   controllers: [TelegramController],
