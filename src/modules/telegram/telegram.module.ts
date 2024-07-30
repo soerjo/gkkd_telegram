@@ -11,6 +11,9 @@ import { TelegramService } from './services/telegram.service';
         const token = process.env.TELEGRAM_BOT_TOKEN;
         return {
           token: token,
+          launchOptions: {
+            dropPendingUpdates: true,
+          },
         };
       },
     }),

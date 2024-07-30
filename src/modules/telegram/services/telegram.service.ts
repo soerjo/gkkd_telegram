@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { Hears, InjectBot, On, Start, Update } from 'nestjs-telegraf';
 import { Context, Markup, Telegraf } from 'telegraf';
 import { TelegrafContext } from '../../../common/interface/context.interface';
@@ -6,8 +6,6 @@ import { TelegrafContext } from '../../../common/interface/context.interface';
 @Update()
 @Injectable()
 export class TelegramService {
-  clientId: number;
-
   constructor(@InjectBot() private bot: Telegraf<TelegrafContext>) {}
 
   async sendMessage(user_id: number, message: string) {
@@ -22,8 +20,6 @@ export class TelegramService {
 
   @Start()
   async startCommand(ctx: Context) {
-    this.clientId = ctx.update.update_id;
-
     const keyboard = Markup.keyboard([
       [Markup.button.contactRequest('Send phone number')],
     ])
