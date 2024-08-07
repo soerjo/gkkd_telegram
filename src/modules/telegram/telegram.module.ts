@@ -3,6 +3,7 @@ import { TelegramSampleService } from './services/telegram-sample.service';
 import { TelegramController } from './controller/telegram.controller';
 import { TelegrafModule } from 'nestjs-telegraf';
 import { TelegramService } from './services/telegram.service';
+import { TelegramEvent } from './controller/telegram.event';
 
 @Module({
   imports: [
@@ -22,6 +23,11 @@ import { TelegramService } from './services/telegram.service';
     }),
   ],
   controllers: [TelegramController],
-  providers: [TelegramSampleService, TelegramService],
+  providers: [
+    TelegramSampleService,
+    TelegramEvent,
+    TelegramService,
+    //  other service
+  ],
 })
 export class TelegramModule {}
