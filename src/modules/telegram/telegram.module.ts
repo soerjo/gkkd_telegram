@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
-import { TelegramSampleService } from './services/telegram-sample.service';
 import { TelegramController } from './controller/telegram.controller';
 import { TelegrafModule } from 'nestjs-telegraf';
 import { TelegramService } from './services/telegram.service';
 import { TelegramEvent } from './controller/telegram.event';
+import { GkkdUserModule } from '../gkkd-user/gkkd-user.module';
 
 @Module({
   imports: [
@@ -21,10 +21,10 @@ import { TelegramEvent } from './controller/telegram.event';
           : {},
       }),
     }),
+    GkkdUserModule,
   ],
   controllers: [TelegramController],
   providers: [
-    TelegramSampleService,
     TelegramEvent,
     TelegramService,
     //  other service

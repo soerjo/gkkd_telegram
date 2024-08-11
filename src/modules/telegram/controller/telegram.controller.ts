@@ -13,7 +13,6 @@ export class TelegramController {
 
   @Get()
   sendMessage(@Query() dto: SendMessageDto) {
-    console.log({ dto });
     this.telegramService.sendMessage(dto.user_id, dto.message);
     return { message: 'success' };
   }
